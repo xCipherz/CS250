@@ -25,6 +25,7 @@ private:
     int boardSize;
     bool placeQueens(int);
     void deleteBoard();
+    bool isUnattacked(int, int);
 };
 #endif
 
