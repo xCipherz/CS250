@@ -12,9 +12,9 @@ using namespace std;
 class ChessBoard
 {
 public:
-	ChessBoard();
+    ChessBoard();
     ChessBoard(int);
-	~ChessBoard();  //Destructor
+    ~ChessBoard();  //Destructor
     void setSize(int);
     int getSize();
     bool solve();
@@ -23,9 +23,9 @@ public:
 private:
     char** boardPtr;
     int boardSize;
+    bool placeQueens();
     bool placeQueens(int);
     void deleteBoard();
     bool isUnattacked(int, int);
 };
 #endif
-
