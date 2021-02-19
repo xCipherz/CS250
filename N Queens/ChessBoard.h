@@ -24,6 +24,7 @@ private:
     char** boardPtr;
     int boardSize;
     bool placeQueens(int);
+    void deleteBoard();
 };
 #endif
 
