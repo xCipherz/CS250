@@ -60,7 +60,7 @@ void ChessBoard::setSize(int size)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			boardPtr[i][j] = ' ';
+			boardPtr[i][j] = '*';
 		}
 	}
 
@@ -75,10 +75,11 @@ int ChessBoard::getSize()
 bool ChessBoard::solve()
 {
 	placeQueens();
-	if (placeQueens() == true)
-	{
-		return true;
-	}
+	return true;
+	//if (placeQueens(boardSize) == true)
+	//{
+		//return true;
+	//}
 }
 
 void ChessBoard::displayBoard()
@@ -87,7 +88,7 @@ void ChessBoard::displayBoard()
 	{
 		for (int j = 0; j < boardSize; j++)
 		{
-			cout << boardPtr[i][j] << " ";
+			cout << boardPtr[i][j] << "";
 		}
 		cout << endl;
 	}
@@ -95,30 +96,32 @@ void ChessBoard::displayBoard()
 bool ChessBoard::placeQueens(int column)
 {
 	int row = 0;
-	//cout << "this is the " << row;
+	//cout << "this is the row: " << row;
+	//cout << "this is the column: " << column;
+	//cout << "This is the boardsize: " << boardSize;
 
 	if (column >= boardSize)
 	{
-		//cout << "This is the boardsize: " << boardSize;
-		//cout << "This is the column: " << column;
 		return true; //The board is filled, problem is solved. Return true.
 	}
 	else
 	{
 		while (row <= boardSize) //unconsidered rows exist in column
 		{
-			if (isUnattacked(row, column)) //[row][column] is unattacked
+			if (isUnattacked(row, column) == true) //[row][column] is unattacked
 			{
 				boardPtr[row][column] = 'Q';
-				cout << "You made a queen";
-
+				//cout << "You made a queen";
+				//row++;
 				placeQueens(column + 1);
 
 				//Do a recursive call to try and place queens
 				//in subsequent columns:
 				if (!placeQueens(column + 1))
 				{
+					cout << "Wow you made it";
 					boardPtr[row][column] = '*';
+					//row++;
 					//If we’re here, placement of the last queen resulted in a dead end; 
 					//no solution could be found. Remove the last queen placed.
 
@@ -134,6 +137,7 @@ bool ChessBoard::placeQueens(int column)
 			else
 			{
 				placeQueens(row + 1);
+				cout << "wow new row";
 				//Square is attacked, move to next row.
 			}
 		}
@@ -146,12 +150,15 @@ bool ChessBoard::placeQueens(int column)
 
 bool ChessBoard::placeQueens()
 {
-	if (placeQueens(boardSize) == false) 
+	if (placeQueens(0) == false)
 	{
-		//printf("Solution does not exist");
+		printf("Solution does not exist");
 		return false;
 	}
-	return true;
+	else
+	{
+		return true;
+	}
 }
 
 bool ChessBoard::isUnattacked(int row, int column)
